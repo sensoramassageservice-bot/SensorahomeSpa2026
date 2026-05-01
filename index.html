@@ -1,0 +1,3068 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Sensora Spa | Touch That Heals</title>
+    <meta name="description" content="Luxury mobile massage therapy. Certified therapists in Riyadh.">
+    <meta name="theme-color" content="#050505">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37; --gold-light: #E6C56A; --gold-dark: #B8941F; --gold-glow: rgba(212,175,55,0.6);
+            --black: #050505; --black-soft: #0a0a0f; --black-card: rgba(15,15,25,0.92);
+            --text: #FFFFFF; --text-dim: #B0A898; --text-muted: #7a7265;
+            --border: rgba(212,175,55,0.35); --border-glow: rgba(212,175,55,0.6);
+            --bg: #050505; --card-bg: rgba(15,15,25,0.92); --card-hover: rgba(25,25,35,0.95);
+            --shadow-gold: 0 8px 30px rgba(212,175,55,0.3); --shadow-deep: 0 20px 60px rgba(0,0,0,0.6);
+            --transition: all 0.4s cubic-bezier(0.16,1,0.3,1); --transition-fast: all 0.2s ease;
+            --blur: blur(20px) saturate(180%);
+        }
+        
+        .light-theme {
+            --bg: #f8f5f0; --black: #f8f5f0; --black-soft: #fffefc;
+            --card-bg: rgba(255,255,255,0.92); --card-hover: rgba(250,248,245,0.98);
+            --text: #1a1a1a; --text-dim: #5a5548; --text-muted: #888275;
+            --border: rgba(184,148,31,0.25); --border-glow: rgba(212,175,55,0.4);
+            --shadow-gold: 0 8px 30px rgba(184,148,31,0.15); --shadow-deep: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        
+        * { margin:0; padding:0; box-sizing:border-box; }
+        
+        html {
+            scroll-behavior:smooth;
+            font-size:16px;
+            scroll-padding-top:80px;
+        }
+        
+        body {
+            font-family:'Cairo',sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            line-height:1.8;
+            overflow-x:hidden;
+            transition:var(--transition);
+            position:relative;
+        }
+        
+        /* ✨ خلفية ضبابية ذهبية متحركة */
+        .ambient-glow {
+            position:fixed;
+            inset:0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 70%);
+            z-index:-2;
+            pointer-events:none;
+            animation:glowPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%,100% { opacity:0.7; transform:scale(1); }
+            50% { opacity:1; transform:scale(1.03); }
+        }
+        
+        /* ✨ نسيج ضوضاء دقيق للعمق */
+        .noise-overlay {
+            position:fixed;
+            inset:0;
+            background-image:url("image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity:0.04;
+            z-index:-1;
+            pointer-events:none;
+        }
+        
+        /* ✨ عناصر زخرفية عائمة لملء المساحات */
+        .floating-decor {
+            position:fixed;
+            pointer-events:none;
+            z-index:-1;
+            opacity:0.4;
+            animation:floatDecor 20s ease-in-out infinite;
+        }
+        
+        .floating-decor:nth-child(1) { top:15%; right:8%; font-size:2rem; animation-delay:0s; }
+        .floating-decor:nth-child(2) { top:45%; left:5%; font-size:1.5rem; animation-delay:2s; }
+        .floating-decor:nth-child(3) { bottom:25%; right:12%; font-size:1.8rem; animation-delay:4s; }
+        .floating-decor:nth-child(4) { top:70%; left:15%; font-size:1.3rem; animation-delay:6s; }
+        .floating-decor:nth-child(5) { top:30%; right:25%; font-size:1.6rem; animation-delay:8s; }
+        
+        @keyframes floatDecor {
+            0%,100% { transform:translateY(0) rotate(0deg); opacity:0.3; }
+            25% { transform:translateY(-20px) rotate(5deg); opacity:0.5; }
+            50% { transform:translateY(0) rotate(0deg); opacity:0.4; }
+            75% { transform:translateY(15px) rotate(-3deg); opacity:0.6; }
+        }
+        
+        #natureCanvas {
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            z-index:-1;
+            pointer-events:none;
+            opacity:0.6;
+        }
+        
+        /* ✨ شريط تقدم التمرير */
+        .scroll-progress {
+            position:fixed;
+            top:0; left:0;
+            height:3px;
+            background:linear-gradient(90deg, transparent, var(--gold), transparent);
+            z-index:10001;
+            width:0%;
+            transition:width 0.1s ease;
+            box-shadow:0 0 10px var(--gold-glow);
+        }
+        
+        /* ✨ شاشة التحميل الفاخرة - شعار قطرة الزيت المُحسَّن */
+        #preloader {
+            position:fixed;
+            inset:0;
+            background:radial-gradient(ellipse at center, #0a0a12 0%, #050508 70%, #000 100%);
+            z-index:100000;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            transition:opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        #preloader.hidden {
+            opacity:0;
+            visibility:hidden;
+            pointer-events:none;
+        }
+        
+        /* 🪄 شعار قطرة الزيت الفاخر الجديد */
+        .oil-drop-container {
+            position:relative;
+            width:140px;
+            height:180px;
+            margin-bottom:30px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        
+        .oil-drop-logo {
+            position:relative;
+            width:80px;
+            height:110px;
+            animation:floatDrop 4s ease-in-out infinite;
+            filter:drop-shadow(0 0 50px rgba(212,175,55,0.9));
+            transform-style:preserve-3d;
+        }
+        
+        /* الجزء العلوي - القطرة */
+        .oil-drop-logo::before {
+            content:'';
+            position:absolute;
+            top:0; left:50%;
+            transform:translateX(-50%);
+            width:55px; height:55px;
+            background:radial-gradient(ellipse at 35% 35%, 
+                #FFF8DC 0%, 
+                #FFF5BA 15%, 
+                #E6C56A 35%, 
+                #D4AF37 60%, 
+                #B8941F 85%, 
+                #997722 100%);
+            border-radius:50% 50% 45% 45%;
+            box-shadow:
+                0 0 35px rgba(212,175,55,0.8),
+                inset 0 -8px 20px rgba(0,0,0,0.25),
+                inset 0 8px 15px rgba(255,255,255,0.3);
+            animation:pulse 2.5s ease-in-out infinite;
+            z-index:2;
+        }
+        
+        /* لمعة القطرة */
+        .oil-drop-logo::after {
+            content:'';
+            position:absolute;
+            top:12px; left:50%;
+            transform:translateX(-35%);
+            width:18px; height:12px;
+            background:radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, transparent 70%);
+            border-radius:50%;
+            z-index:3;
+            animation:shine 2s ease-in-out infinite;
+        }
+        
+        /* جسم القطرة المتدلي */
+        .oil-drop-body {
+            position:absolute;
+            top:48px; left:50%;
+            transform:translateX(-50%);
+            width:70px; height:65px;
+            background:linear-gradient(180deg, 
+                rgba(212,175,55,0.95) 0%, 
+                rgba(184,148,31,0.9) 40%, 
+                rgba(150,120,25,0.85) 100%);
+            border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+            box-shadow:
+                0 0 30px rgba(212,175,55,0.6),
+                inset 0 -10px 25px rgba(0,0,0,0.2);
+            z-index:1;
+            animation:dripFlow 4s ease-in-out infinite;
+        }
+        
+        /* نقطة السقوط */
+        .oil-drop-tip {
+            position:absolute;
+            bottom:-15px; left:50%;
+            transform:translateX(-50%);
+            width:12px; height:20px;
+            background:linear-gradient(180deg, #D4AF37, #B8941F);
+            border-radius:50% 50% 50% 50%/30% 30% 70% 70%;
+            box-shadow:0 0 20px rgba(212,175,55,0.7);
+            animation:tipDrip 4s ease-in-out infinite;
+            z-index:1;
+        }
+        
+        /* هالة ذهبية حول الشعار */
+        .oil-drop-glow {
+            position:absolute;
+            inset:-30px;
+            background:radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+            border-radius:50%;
+            animation:glowRing 3s ease-in-out infinite;
+            pointer-events:none;
+            z-index:0;
+        }
+        
+        /* جسيمات صغيرة حول القطرة */
+        .oil-particles {
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+        }
+        
+        .oil-particle {
+            position:absolute;
+            width:4px; height:4px;
+            background:var(--gold);
+            border-radius:50%;
+            animation:particleFloat 3s ease-in-out infinite;
+            box-shadow:0 0 10px var(--gold);
+        }
+        
+        .oil-particle:nth-child(1) { top:20%; left:10%; animation-delay:0s; }
+        .oil-particle:nth-child(2) { top:60%; right:15%; animation-delay:0.5s; }
+        .oil-particle:nth-child(3) { bottom:30%; left:25%; animation-delay:1s; }
+        .oil-particle:nth-child(4) { top:40%; right:30%; animation-delay:1.5s; }
+        
+        @keyframes floatDrop {
+            0%,100% { transform:translateY(0) scale(1) rotate(0deg); }
+            25% { transform:translateY(-12px) scale(1.02) rotate(1deg); }
+            50% { transform:translateY(-20px) scale(1.05) rotate(0deg); }
+            75% { transform:translateY(-8px) scale(1.02) rotate(-1deg); }
+        }
+        
+        @keyframes pulse {
+            0%,100% { 
+                box-shadow:0 0 35px rgba(212,175,55,0.8), inset 0 -8px 20px rgba(0,0,0,0.25), inset 0 8px 15px rgba(255,255,255,0.3);
+                transform:translateX(-50%) scale(1);
+            }
+            50% { 
+                box-shadow:0 0 55px rgba(212,175,55,1), inset 0 -8px 20px rgba(0,0,0,0.25), inset 0 8px 15px rgba(255,255,255,0.5);
+                transform:translateX(-50%) scale(1.03);
+            }
+        }
+        
+        @keyframes shine {
+            0%,100% { opacity:0.8; transform:translateX(-35%) scale(1); }
+            50% { opacity:1; transform:translateX(-35%) scale(1.2); }
+        }
+        
+        @keyframes dripFlow {
+            0%,100% { 
+                border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+                transform:translateX(-50%) scaleY(1);
+            }
+            50% { 
+                border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
+                transform:translateX(-50%) scaleY(1.08);
+            }
+        }
+        
+        @keyframes tipDrip {
+            0%,90%,100% { 
+                height:20px; opacity:1; transform:translateX(-50%) translateY(0);
+            }
+            95% { 
+                height:8px; opacity:0.5; transform:translateX(-50%) translateY(10px);
+            }
+        }
+        
+        @keyframes glowRing {
+            0%,100% { opacity:0.4; transform:scale(1); }
+            50% { opacity:0.7; transform:scale(1.15); }
+        }
+        
+        @keyframes particleFloat {
+            0%,100% { transform:translateY(0) scale(1); opacity:0.6; }
+            50% { transform:translateY(-25px) scale(1.3); opacity:1; }
+        }
+        
+        .loader-text {
+            font-family:'Cinzel',serif;
+            font-size:2.8rem;
+            color:var(--gold);
+            font-weight:800;
+            background:linear-gradient(135deg, #FFF8DC, #D4AF37, #E6C56A, #B8941F, #FFF8DC);
+            background-size:300% 100%;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            animation:shine 3s linear infinite;
+            letter-spacing:3px;
+            text-shadow:0 0 30px rgba(212,175,55,0.4);
+        }
+        
+        @keyframes shine {
+            0% { background-position:0% 50%; }
+            100% { background-position:300% 50%; }
+        }
+        
+        .loader-subtitle {
+            color:var(--text-dim);
+            font-style:italic;
+            margin-top:8px;
+            animation:fadeIn 1.5s ease;
+            font-family:'Playfair Display',serif;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity:0; transform:translateY(10px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+        
+        /* ✨ طبقة اختيار الموسيقى */
+        .music-overlay {
+            position:fixed;
+            inset:0;
+            background:rgba(5,5,10,0.95);
+            z-index:100001;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            visibility:hidden;
+            transition:all 0.5s ease;
+            backdrop-filter:var(--blur);
+        }
+        
+        .music-overlay.show {
+            opacity:1;
+            visibility:visible;
+        }
+        
+        .music-card {
+            background:var(--card-bg);
+            border:2px solid var(--border);
+            border-radius:30px;
+            padding:35px 30px;
+            text-align:center;
+            max-width:420px;
+            width:90%;
+            box-shadow:var(--shadow-deep), 0 0 60px rgba(212,175,55,0.2);
+            animation:modalEnter 0.4s ease;
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .music-card::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg, rgba(212,175,55,0.05), transparent 50%);
+            pointer-events:none;
+        }
+        
+        @keyframes modalEnter {
+            from { opacity:0; transform:scale(0.9) translateY(20px); }
+            to { opacity:1; transform:scale(1) translateY(0); }
+        }
+        
+        .music-card h3 {
+            font-family:'Cinzel',serif;
+            color:var(--gold);
+            margin-bottom:12px;
+            font-size:1.5rem;
+        }
+        
+        .music-card p {
+            color:var(--text-dim);
+            margin-bottom:25px;
+            font-size:1.05rem;
+        }
+        
+        .music-btns {
+            display:flex;
+            gap:12px;
+            justify-content:center;
+        }
+        
+        /* ✨ شريط التنقل الزجاجي */
+        .navbar {
+            position:fixed;
+            top:0; left:0; right:0;
+            z-index:10000;
+            padding:12px 5%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(5,5,10,0.85);
+            backdrop-filter:var(--blur);
+            border-bottom:1px solid transparent;
+            transition:var(--transition);
+            -webkit-backdrop-filter:var(--blur);
+        }
+        
+        .navbar.scrolled {
+            padding:8px 5%;
+            border-bottom:1px solid var(--border);
+            box-shadow:0 10px 40px rgba(0,0,0,0.4);
+            background:rgba(5,5,10,0.95);
+        }
+        
+        .nav-logo {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            text-decoration:none;
+            transition:var(--transition-fast);
+        }
+        
+        .nav-logo:hover {
+            transform:scale(1.02);
+        }
+        
+        .nav-oil {
+            position:relative;
+            width:40px;
+            height:50px;
+            flex-shrink:0;
+            filter:drop-shadow(0 0 8px rgba(212,175,55,0.5));
+        }
+        
+        .nav-oil::before {
+            content:'';
+            position:absolute;
+            top:0; left:50%;
+            transform:translateX(-50%);
+            width:20px; height:20px;
+            background:radial-gradient(circle at 40% 40%, #FFF8DC, #E6C56A, #D4AF37, #B8941F);
+            border-radius:50%;
+            animation:pulse 3s ease-in-out infinite;
+        }
+        
+        .nav-oil::after {
+            content:'';
+            position:absolute;
+            top:16px; left:50%;
+            transform:translateX(-50%);
+            border-left:14px solid transparent;
+            border-right:14px solid transparent;
+            border-top:34px solid #D4AF37;
+            border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+        }
+        
+        .nav-logo-text {
+            font-family:'Cinzel',serif;
+            font-size:1.5rem;
+            color:var(--gold);
+            font-weight:700;
+            letter-spacing:1px;
+            background:linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        
+        .nav-menu {
+            display:flex;
+            gap:28px;
+            list-style:none;
+        }
+        
+        .nav-link {
+            color:var(--text-dim);
+            text-decoration:none;
+            font-size:0.95rem;
+            font-weight:500;
+            position:relative;
+            padding:8px 0;
+            transition:var(--transition-fast);
+        }
+        
+        .nav-link::after {
+            content:'';
+            position:absolute;
+            bottom:0; left:0;
+            width:0; height:2px;
+            background:var(--gold);
+            transition:var(--transition);
+            border-radius:2px;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color:var(--gold);
+        }
+        
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            width:100%;
+        }
+        
+        .lang-btn {
+            padding:6px 14px;
+            border:1px solid var(--border);
+            background:transparent;
+            color:var(--text-dim);
+            cursor:pointer;
+            border-radius:20px;
+            font-size:0.85rem;
+            font-weight:600;
+            margin:0 3px;
+            transition:var(--transition-fast);
+            min-width:42px;
+        }
+        
+        .lang-btn:hover {
+            border-color:var(--gold);
+            color:var(--gold);
+            transform:translateY(-2px);
+        }
+        
+        .lang-btn.active {
+            background:var(--gold);
+            color:#000;
+            border-color:var(--gold);
+            box-shadow:0 4px 15px rgba(212,175,55,0.4);
+        }
+        
+        /* ✨ قسم الهيرو الفاخر */
+        .hero {
+            min-height:90vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:120px 20px 80px;
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .hero::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:radial-gradient(ellipse at center, transparent 0%, rgba(5,5,10,0.8) 100%);
+            z-index:1;
+        }
+        
+        .hero-content {
+            position:relative;
+            z-index:2;
+            max-width:900px;
+            animation:heroFadeIn 1s ease;
+        }
+        
+        @keyframes heroFadeIn {
+            from { opacity:0; transform:translateY(30px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+        
+        .hero-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:10px 24px;
+            border:2px solid var(--border);
+            border-radius:40px;
+            color:var(--gold);
+            margin:15px 0 25px;
+            background:rgba(212,175,55,0.08);
+            backdrop-filter:blur(10px);
+            font-weight:500;
+            font-size:0.95rem;
+            transition:var(--transition);
+            animation:badgeFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes badgeFloat {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-5px); }
+        }
+        
+        .hero-badge:hover {
+            border-color:var(--gold);
+            box-shadow:0 0 30px rgba(212,175,55,0.3);
+            transform:translateY(-3px);
+        }
+        
+        .hero h1 {
+            font-family:'Cinzel',serif;
+            font-size:clamp(2.5rem,8vw,5rem);
+            color:var(--gold);
+            background:linear-gradient(135deg, #FFF8DC, #D4AF37, #E6C56A, #B8941F);
+            background-size:300% 100%;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            animation:shine 4s linear infinite;
+            margin-bottom:15px;
+            text-shadow:0 0 40px rgba(212,175,55,0.3);
+            letter-spacing:2px;
+        }
+        
+        .hero p {
+            font-style:italic;
+            color:var(--text-dim);
+            font-size:1.4rem;
+            margin:10px 0 20px;
+            font-family:'Playfair Display',serif;
+        }
+        
+        .vip-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color:#000;
+            padding:8px 20px;
+            border-radius:25px;
+            font-weight:700;
+            font-size:0.9rem;
+            margin:15px 0 25px;
+            box-shadow:0 8px 25px rgba(212,175,55,0.5);
+            animation:glowPulse 3s ease-in-out infinite;
+        }
+        
+        .hero-desc {
+            color:var(--text-dim);
+            margin:15px 0 30px;
+            font-size:1.1rem;
+            line-height:1.9;
+            max-width:650px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        
+        .hero-btns {
+            display:flex;
+            gap:15px;
+            justify-content:center;
+            flex-wrap:wrap;
+            margin-top:20px;
+        }
+        
+        /* ✨ الأزرار الفاخرة */
+        .btn {
+            padding:14px 32px;
+            border-radius:35px;
+            font-weight:700;
+            cursor:pointer;
+            transition:var(--transition);
+            text-decoration:none;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            border:none;
+            font-size:1rem;
+            overflow:hidden;
+            position:relative;
+            min-width:160px;
+            letter-spacing:0.5px;
+        }
+        
+        .btn::before {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:100%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition:0.6s;
+        }
+        
+        .btn:hover::before {
+            left:100%;
+        }
+        
+        .btn-gold {
+            background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color:#000;
+            box-shadow:0 10px 35px rgba(212,175,55,0.5);
+            position:relative;
+            z-index:1;
+        }
+        
+        .btn-gold:hover {
+            transform:translateY(-4px) scale(1.02);
+            box-shadow:0 15px 50px rgba(212,175,55,0.7);
+        }
+        
+        .btn-outline {
+            background:transparent;
+            border:2px solid var(--border);
+            color:var(--gold);
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .btn-outline::after {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(212,175,55,0.1);
+            opacity:0;
+            transition:var(--transition-fast);
+            z-index:-1;
+        }
+        
+        .btn-outline:hover {
+            border-color:var(--gold);
+            transform:translateY(-3px);
+            box-shadow:0 10px 30px rgba(212,175,55,0.25);
+        }
+        
+        .btn-outline:hover::after {
+            opacity:1;
+        }
+        
+        .btn-sm {
+            padding:8px 18px;
+            font-size:0.85rem;
+            border-radius:25px;
+            min-width:auto;
+        }
+        
+        /* ✨ أقسام المحتوى */
+        section {
+            padding:80px 4%;
+            position:relative;
+        }
+        
+        .section-header {
+            text-align:center;
+            margin-bottom:55px;
+            position:relative;
+        }
+        
+        .section-header::after {
+            content:'';
+            position:absolute;
+            bottom:-25px; left:50%;
+            transform:translateX(-50%);
+            width:120px; height:2px;
+            background:linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .section-label {
+            font-size:0.9rem;
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:4px;
+            font-weight:600;
+            display:block;
+            margin-bottom:12px;
+            position:relative;
+        }
+        
+        .section-label::before,
+        .section-label::after {
+            content:'✦';
+            margin:0 10px;
+            opacity:0.7;
+        }
+        
+        .section-header h2 {
+            font-family:'Cinzel',serif;
+            font-size:clamp(1.8rem,5vw,3.2rem);
+            color:var(--gold);
+            margin-top:5px;
+            text-shadow:0 0 20px rgba(212,175,55,0.2);
+        }
+        
+        /* ✨ بطاقات الخدمات */
+        .services-grid,
+        .offers-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+            gap:25px;
+            max-width:1300px;
+            margin:0 auto;
+        }
+        
+        .service-card,
+        .offer-card {
+            background:var(--card-bg);
+            border:1px solid var(--border);
+            border-radius:25px;
+            padding:30px 25px;
+            transition:var(--transition);
+            backdrop-filter:blur(15px);
+            -webkit-backdrop-filter:blur(15px);
+            opacity:0;
+            transform:translateY(25px);
+            animation:fadeUp 0.7s ease forwards;
+            position:relative;
+            overflow:hidden;
+            box-shadow:var(--shadow-deep);
+        }
+        
+        .service-card::before,
+        .offer-card::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg, rgba(212,175,55,0.03), transparent 60%);
+            opacity:0;
+            transition:var(--transition-fast);
+            pointer-events:none;
+            z-index:0;
+        }
+        
+        .service-card:hover::before,
+        .offer-card:hover::before {
+            opacity:1;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+        
+        .service-card:nth-child(1){animation-delay:0.1s}
+        .service-card:nth-child(2){animation-delay:0.15s}
+        .service-card:nth-child(3){animation-delay:0.2s}
+        .service-card:nth-child(4){animation-delay:0.25s}
+        .service-card:nth-child(5){animation-delay:0.3s}
+        .service-card:nth-child(6){animation-delay:0.35s}
+        .service-card:nth-child(7){animation-delay:0.4s}
+        .service-card:nth-child(8){animation-delay:0.45s}
+        .service-card:nth-child(9){animation-delay:0.5s}
+        .service-card:nth-child(10){animation-delay:0.55s}
+        .service-card:nth-child(11){animation-delay:0.6s}
+        
+        .service-card:hover,
+        .offer-card:hover {
+            transform:translateY(-10px) scale(1.01);
+            border-color:var(--gold);
+            box-shadow:0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.25);
+            z-index:2;
+        }
+        
+        .service-icon {
+            font-size:3rem;
+            margin-bottom:15px;
+            display:block;
+            text-align:center;
+            filter:drop-shadow(0 0 15px rgba(212,175,55,0.4));
+            transition:var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            transform:scale(1.1) rotate(5deg);
+        }
+        
+        .service-card h3,
+        .offer-card h3 {
+            font-family:'Cinzel',serif;
+            color:var(--gold);
+            margin:10px 0 12px;
+            font-size:1.3rem;
+            text-align:center;
+        }
+        
+        .service-price {
+            font-size:1.4rem;
+            font-weight:700;
+            color:var(--gold);
+            text-align:center;
+            margin:8px 0 18px;
+            display:block;
+        }
+        
+        .service-card p,
+        .offer-card p {
+            color:var(--text-dim);
+            font-size:0.95rem;
+            text-align:center;
+            margin-bottom:18px;
+            min-height:45px;
+        }
+        
+        .service-actions {
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+            justify-content:center;
+            margin-top:10px;
+        }
+        
+        .offer-price {
+            font-size:2.8rem;
+            font-weight:700;
+            color:var(--gold);
+            text-align:center;
+            margin:15px 0 10px;
+            display:block;
+            text-shadow:0 0 20px rgba(212,175,55,0.3);
+        }
+        
+        .offer-price span {
+            font-size:1.1rem;
+            font-weight:500;
+        }
+        
+        .offer-badge {
+            position:absolute;
+            top:15px;
+            right:15px;
+            background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color:#000;
+            padding:5px 16px;
+            border-radius:20px;
+            font-weight:700;
+            font-size:0.8rem;
+            box-shadow:0 5px 20px rgba(212,175,55,0.5);
+            z-index:2;
+            animation:badgePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes badgePulse {
+            0%,100% { box-shadow:0 5px 20px rgba(212,175,55,0.5); }
+            50% { box-shadow:0 5px 30px rgba(212,175,55,0.8); }
+        }
+        
+        /* ✨ أعلام الدول */
+        .flags-container {
+            display:flex;
+            justify-content:center;
+            gap:22px;
+            flex-wrap:wrap;
+            margin:30px 0;
+        }
+        
+        .flag-item {
+            cursor:pointer;
+            text-align:center;
+            transition:var(--transition);
+            padding:10px;
+            border-radius:20px;
+            min-width:90px;
+        }
+        
+        .flag-item:hover {
+            transform:translateY(-8px) scale(1.05);
+            background:rgba(212,175,55,0.08);
+            box-shadow:0 10px 30px rgba(212,175,55,0.2);
+        }
+        
+        .flag-circle {
+            width:60px;
+            height:60px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.06);
+            border:2px solid var(--border);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.8rem;
+            margin:0 auto 10px;
+            transition:var(--transition);
+            box-shadow:0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .flag-item:hover .flag-circle {
+            border-color:var(--gold);
+            transform:scale(1.1);
+            box-shadow:0 8px 30px rgba(212,175,55,0.4);
+        }
+        
+        .flag-item span {
+            font-size:0.9rem;
+            color:var(--text-dim);
+            font-weight:500;
+        }
+        
+        /* ✨ الإحصائيات */
+        .stats-box {
+            background:var(--card-bg);
+            border:1px solid var(--border);
+            border-radius:30px;
+            padding:35px 25px;
+            max-width:850px;
+            margin:50px auto;
+            text-align:center;
+            box-shadow:var(--shadow-deep);
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .stats-box::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:radial-gradient(ellipse at top, rgba(212,175,55,0.08), transparent 70%);
+            pointer-events:none;
+        }
+        
+        .stats-title {
+            color:var(--gold);
+            font-family:'Cinzel',serif;
+            font-size:1.4rem;
+            margin-bottom:15px;
+        }
+        
+        .stats-number {
+            font-family:'Cinzel',serif;
+            font-size:4.5rem;
+            color:var(--gold);
+            font-weight:700;
+            text-shadow:0 0 30px rgba(212,175,55,0.4);
+            display:block;
+            margin:10px 0;
+            animation:countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity:0; transform:scale(0.5); }
+            to { opacity:1; transform:scale(1); }
+        }
+        
+        .stats-subtitle {
+            color:var(--text-dim);
+            font-size:1.1rem;
+        }
+        
+        /* ✨ التقييمات */
+        .reviews-section {
+            text-align:center;
+            margin:50px 0 30px;
+        }
+        
+        .reviews-section h3 {
+            font-family:'Cinzel',serif;
+            color:var(--gold);
+            font-size:2.2rem;
+            margin-bottom:15px;
+        }
+        
+        .reviews-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+            gap:25px;
+            max-width:1100px;
+            margin:0 auto;
+        }
+        
+        .review-card {
+            background:var(--card-bg);
+            border:1px solid var(--border);
+            border-radius:25px;
+            padding:30px 25px;
+            transition:var(--transition);
+            text-align:center;
+            position:relative;
+        }
+        
+        .review-card::before {
+            content:'"';
+            position:absolute;
+            top:15px; right:20px;
+            font-family:'Playfair Display',serif;
+            font-size:5rem;
+            color:rgba(212,175,55,0.1);
+            line-height:1;
+            pointer-events:none;
+        }
+        
+        .review-card:hover {
+            border-color:var(--gold);
+            transform:translateY(-6px);
+            box-shadow:0 15px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.15);
+        }
+        
+        .review-stars {
+            color:var(--gold);
+            font-size:1.3rem;
+            margin-bottom:15px;
+            letter-spacing:3px;
+        }
+        
+        .review-text {
+            color:var(--text-dim);
+            font-style:italic;
+            margin-bottom:18px;
+            line-height:1.9;
+            font-size:1rem;
+        }
+        
+        .review-author {
+            color:var(--gold);
+            font-weight:600;
+            font-size:1.05rem;
+            font-family:'Playfair Display',serif;
+        }
+        
+        /* ✨ صندوق التعليقات */
+        .comment-box,
+        .subscribe-box {
+            max-width:650px;
+            margin:40px auto;
+            background:var(--card-bg);
+            border:2px solid var(--border);
+            border-radius:30px;
+            padding:35px 30px;
+            text-align:center;
+            box-shadow:var(--shadow-deep);
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .comment-box::before,
+        .subscribe-box::before {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0;
+            height:3px;
+            background:linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .comment-box h3,
+        .subscribe-box h3 {
+            color:var(--gold);
+            font-family:'Cinzel',serif;
+            margin-bottom:20px;
+            font-size:1.5rem;
+        }
+        
+        .comment-box textarea,
+        .subscribe-box input {
+            width:100%;
+            height:90px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid var(--border);
+            border-radius:20px;
+            padding:15px 18px;
+            color:var(--text);
+            font-family:'Cairo',sans-serif;
+            font-size:1rem;
+            resize:vertical;
+            transition:var(--transition-fast);
+            margin-bottom:20px;
+        }
+        
+        .comment-box textarea:focus,
+        .subscribe-box input:focus {
+            outline:none;
+            border-color:var(--gold);
+            box-shadow:0 0 0 3px rgba(212,175,55,0.2);
+            background:rgba(255,255,255,0.08);
+        }
+        
+        .subscribe-box input {
+            height:55px;
+            text-align:center;
+            font-size:1.1rem;
+        }
+        
+        /* ✨ الفوتر */
+        footer {
+            background:rgba(10,10,18,0.95);
+            border-top:1px solid var(--border);
+            padding:40px 5% 30px;
+            text-align:center;
+            margin-top:30px;
+        }
+        
+        .footer-content {
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:40px;
+            margin-bottom:25px;
+        }
+        
+        .footer-section h4 {
+            color:var(--gold);
+            font-family:'Cinzel',serif;
+            margin-bottom:12px;
+            font-size:1.2rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color:var(--text-dim);
+            text-decoration:none;
+            transition:var(--transition-fast);
+            display:block;
+            margin:5px 0;
+        }
+        
+        .footer-section a:hover {
+            color:var(--gold);
+            transform:translateX(3px);
+        }
+        
+        .footer-bottom {
+            color:var(--text-muted);
+            border-top:1px solid var(--border);
+            padding-top:20px;
+            font-size:0.9rem;
+        }
+        
+        /* ✨ توقيع Sheko الفاخر */
+        .sheko-footer {
+            background:rgba(8,8,15,0.98);
+            border-top:3px solid var(--gold);
+            padding:40px 25px;
+            text-align:center;
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .sheko-footer::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:radial-gradient(ellipse at center, rgba(212,175,55,0.05), transparent 70%);
+            pointer-events:none;
+        }
+        
+        .sheko-name {
+            font-family:'Cinzel',serif;
+            font-size:3rem;
+            font-weight:800;
+            background:linear-gradient(90deg, #ffd700, #ffaa00, #ffd700, #ffcc00, #ffd700);
+            background-size:400% 100%;
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            animation:shekoShine 4s linear infinite;
+            letter-spacing:8px;
+            text-shadow:0 0 30px rgba(212,175,55,0.5);
+        }
+        
+        @keyframes shekoShine {
+            0% { background-position:0% 50%; }
+            100% { background-position:400% 50%; }
+        }
+        
+        .sheko-footer p {
+            color:var(--text-dim);
+            margin:12px 0 20px;
+            font-size:1.05rem;
+        }
+        
+        /* ✨ أزرار العائمة */
+        .float-btn {
+            position:fixed;
+            bottom:25px;
+            z-index:9997;
+            width:54px;
+            height:54px;
+            border-radius:50%;
+            background:rgba(10,10,20,0.85);
+            border:2px solid var(--border);
+            color:var(--gold);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            backdrop-filter:blur(10px);
+            transition:var(--transition);
+            box-shadow:0 5px 25px rgba(0,0,0,0.4);
+            font-size:1.3rem;
+        }
+        
+        .float-btn:hover {
+            transform:translateY(-5px) scale(1.1);
+            border-color:var(--gold);
+            box-shadow:0 10px 35px rgba(212,175,55,0.4);
+            color:var(--gold-light);
+        }
+        
+        .whatsapp-float {
+            left:25px;
+            background:linear-gradient(135deg, #25D366, #128C7E);
+            color:#fff;
+            border:none;
+            font-size:1.6rem;
+            animation:whatsappFloat 3s ease-in-out infinite;
+            box-shadow:0 8px 30px rgba(37,211,102,0.5);
+        }
+        
+        .whatsapp-float:hover {
+            box-shadow:0 12px 40px rgba(37,211,102,0.7);
+            transform:translateY(-6px) scale(1.12);
+        }
+        
+        @keyframes whatsappFloat {
+            0%,100% { transform:translateY(0) scale(1); }
+            50% { transform:translateY(-10px) scale(1.05); }
+        }
+        
+        .music-float {
+            left:90px;
+            transition:var(--transition);
+        }
+        
+        .music-float.playing {
+            background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color:#000;
+            animation:spin 3s linear infinite;
+            box-shadow:0 0 30px rgba(212,175,55,0.6);
+        }
+        
+        @keyframes spin {
+            from { transform:rotate(0deg); }
+            to { transform:rotate(360deg); }
+        }
+        
+        .theme-toggle {
+            bottom:25px;
+            right:90px;
+            background:var(--card-bg);
+            border:2px solid var(--border);
+            transition:var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            border-color:var(--gold);
+            transform:rotate(15deg) scale(1.1);
+        }
+        
+        /* ✨ المودالات */
+        .modal {
+            position:fixed;
+            inset:0;
+            background:rgba(5,5,12,0.92);
+            z-index:100000;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+        }
+        
+        .modal.open {
+            display:flex;
+            animation:fadeIn 0.35s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity:0; }
+            to { opacity:1; }
+        }
+        
+        .modal-content {
+            background:var(--card-bg);
+            border:2px solid var(--border);
+            border-radius:30px;
+            padding:30px 25px;
+            max-width:900px;
+            width:100%;
+            max-height:85vh;
+            overflow-y:auto;
+            position:relative;
+            box-shadow:0 0 80px rgba(212,175,55,0.25), var(--shadow-deep);
+            animation:modalSlide 0.4s ease;
+        }
+        
+        @keyframes modalSlide {
+            from { opacity:0; transform:scale(0.95) translateY(20px); }
+            to { opacity:1; transform:scale(1) translateY(0); }
+        }
+        
+        .modal-content::-webkit-scrollbar {
+            width:6px;
+        }
+        
+        .modal-content::-webkit-scrollbar-track {
+            background:rgba(255,255,255,0.05);
+            border-radius:10px;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb {
+            background:var(--gold);
+            border-radius:10px;
+        }
+        
+        .modal-close {
+            position:absolute;
+            top:15px;
+            right:20px;
+            background:none;
+            border:none;
+            color:var(--gold);
+            font-size:1.8rem;
+            cursor:pointer;
+            transition:var(--transition-fast);
+            width:35px;
+            height:35px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        
+        .modal-close:hover {
+            background:rgba(212,175,55,0.15);
+            transform:rotate(90deg);
+        }
+        
+        .modal-title {
+            font-family:'Cinzel',serif;
+            color:var(--gold);
+            text-align:center;
+            font-size:1.6rem;
+            margin-bottom:25px;
+            padding-bottom:15px;
+            border-bottom:1px solid var(--border);
+        }
+        
+        /* ✨ شبكة المختصات */
+        .therapist-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+            gap:15px;
+            margin:20px 0;
+        }
+        
+        .therapist-card {
+            background:rgba(212,175,55,0.06);
+            border:1px solid var(--border);
+            border-radius:22px;
+            padding:20px 15px;
+            text-align:center;
+            cursor:pointer;
+            transition:var(--transition);
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .therapist-card::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg, rgba(212,175,55,0.1), transparent 60%);
+            opacity:0;
+            transition:var(--transition-fast);
+        }
+        
+        .therapist-card:hover::before,
+        .therapist-card.selected::before {
+            opacity:1;
+        }
+        
+        .therapist-card:hover,
+        .therapist-card.selected {
+            border-color:var(--gold);
+            transform:translateY(-5px);
+            box-shadow:0 10px 30px rgba(212,175,55,0.25);
+        }
+        
+        .therapist-card.selected {
+            background:rgba(212,175,55,0.18);
+        }
+        
+        .therapist-card .avatar {
+            font-size:2.5rem;
+            margin-bottom:10px;
+            display:block;
+            filter:drop-shadow(0 0 10px rgba(212,175,55,0.3));
+        }
+        
+        .therapist-card .name {
+            color:var(--gold);
+            font-weight:700;
+            margin:5px 0 3px;
+        }
+        
+        .therapist-card .nation {
+            color:var(--text-dim);
+            font-size:0.9rem;
+            margin-bottom:5px;
+        }
+        
+        .therapist-card .price {
+            color:var(--gold);
+            font-weight:600;
+            font-size:1.05rem;
+        }
+        
+        /* ✨ خيارات الخدمات */
+        .service-option-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+            gap:12px;
+            margin:20px 0;
+        }
+        
+        .service-option {
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            border-radius:18px;
+            padding:15px 10px;
+            text-align:center;
+            cursor:pointer;
+            transition:var(--transition);
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .service-option::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(212,175,55,0.08);
+            opacity:0;
+            transition:var(--transition-fast);
+        }
+        
+        .service-option:hover::before,
+        .service-option.selected::before {
+            opacity:1;
+        }
+        
+        .service-option:hover,
+        .service-option.selected {
+            border-color:var(--gold);
+            transform:translateY(-3px);
+            box-shadow:0 8px 25px rgba(212,175,55,0.2);
+        }
+        
+        .service-option.selected {
+            background:rgba(212,175,55,0.15);
+        }
+        
+        .service-option .icon {
+            font-size:1.8rem;
+            display:block;
+            margin-bottom:5px;
+        }
+        
+        .service-option .title {
+            font-size:0.8rem;
+            color:var(--text-dim);
+            margin:3px 0;
+            display:block;
+        }
+        
+        .service-option .price {
+            color:var(--gold);
+            font-weight:600;
+            font-size:0.9rem;
+        }
+        
+        /* ✨ خيارات الوقت */
+        .time-grid {
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+            justify-content:center;
+            margin:20px 0;
+        }
+        
+        .time-option {
+            padding:12px 20px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            border-radius:16px;
+            cursor:pointer;
+            transition:var(--transition);
+            font-weight:500;
+            min-width:85px;
+            text-align:center;
+        }
+        
+        .time-option:hover,
+        .time-option.selected {
+            border-color:var(--gold);
+            background:rgba(212,175,55,0.15);
+            color:var(--gold);
+            transform:translateY(-3px);
+            box-shadow:0 8px 25px rgba(212,175,55,0.2);
+        }
+        
+        /* ✨ عرض السعر */
+        .price-display {
+            text-align:center;
+            margin:25px 0;
+            padding:20px;
+            background:rgba(212,175,55,0.08);
+            border:1px solid var(--border);
+            border-radius:22px;
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .price-display::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg, transparent, rgba(212,175,55,0.05), transparent);
+            animation:shine 3s linear infinite;
+            pointer-events:none;
+        }
+        
+        .price-display span:first-child {
+            color:var(--text-dim);
+            font-size:1.05rem;
+        }
+        
+        .price-amount {
+            font-size:2.3rem;
+            color:var(--gold);
+            font-weight:700;
+            display:block;
+            margin-top:8px;
+            text-shadow:0 0 20px rgba(212,175,55,0.4);
+        }
+        
+        /* ✨ شاشة الشكر */
+        .thanks-overlay {
+            position:fixed;
+            inset:0;
+            background:rgba(5,5,12,0.9);
+            z-index:100002;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            backdrop-filter:blur(15px);
+            -webkit-backdrop-filter:blur(15px);
+        }
+        
+        .thanks-overlay.show {
+            display:flex;
+            animation:fadeIn 0.4s ease;
+        }
+        
+        .thanks-card {
+            background:var(--card-bg);
+            border:3px solid var(--gold);
+            border-radius:35px;
+            padding:40px 35px;
+            text-align:center;
+            max-width:420px;
+            width:90%;
+            box-shadow:0 0 100px rgba(212,175,55,0.6), var(--shadow-deep);
+            animation:glowPulse 2.5s ease-in-out infinite;
+            position:relative;
+            overflow:hidden;
+        }
+        
+        .thanks-card::before {
+            content:'';
+            position:absolute;
+            inset:-2px;
+            background:linear-gradient(45deg, transparent, rgba(212,175,55,0.2), transparent);
+            animation:borderGlow 3s linear infinite;
+            pointer-events:none;
+            border-radius:33px;
+        }
+        
+        @keyframes borderGlow {
+            0% { transform:rotate(0deg); }
+            100% { transform:rotate(360deg); }
+        }
+        
+        @keyframes glowPulse {
+            0%,100% { box-shadow:0 0 70px rgba(212,175,55,0.5), var(--shadow-deep); }
+            50% { box-shadow:0 0 100px rgba(212,175,55,0.8), var(--shadow-deep); }
+        }
+        
+        .thanks-card .icon {
+            font-size:4rem;
+            margin-bottom:15px;
+            display:block;
+            animation:bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-10px); }
+        }
+        
+        .thanks-card h3 {
+            font-family:'Cinzel',serif;
+            color:var(--gold);
+            margin-bottom:12px;
+            font-size:1.6rem;
+        }
+        
+        .thanks-card p {
+            color:var(--text-dim);
+            margin-bottom:25px;
+            font-size:1.05rem;
+        }
+        
+        /* ✨ الدردشة */
+        .chat-widget {
+            position:fixed;
+            bottom:25px;
+            right:25px;
+            z-index:9999;
+        }
+        
+        .chat-toggle {
+            width:56px;
+            height:56px;
+            border-radius:50%;
+            background:linear-gradient(135deg, #00D4FF, var(--gold));
+            border:none;
+            color:#000;
+            font-size:1.4rem;
+            cursor:pointer;
+            animation:pulseChat 2.5s ease-in-out infinite;
+            box-shadow:0 8px 30px rgba(0,212,255,0.4);
+            transition:var(--transition);
+        }
+        
+        .chat-toggle:hover {
+            transform:scale(1.1) rotate(5deg);
+            box-shadow:0 12px 40px rgba(0,212,255,0.6);
+        }
+        
+        @keyframes pulseChat {
+            0%,100% { box-shadow:0 0 0 0 rgba(0,212,255,0.4); }
+            50% { box-shadow:0 0 0 15px rgba(0,212,255,0); }
+        }
+        
+        .chat-box {
+            position:absolute;
+            bottom:70px;
+            right:0;
+            width:340px;
+            height:480px;
+            background:var(--card-bg);
+            border:2px solid var(--border);
+            border-radius:25px;
+            display:none;
+            flex-direction:column;
+            overflow:hidden;
+            box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 50px rgba(212,175,55,0.15);
+            animation:chatSlide 0.3s ease;
+        }
+        
+        @keyframes chatSlide {
+            from { opacity:0; transform:translateY(20px) scale(0.95); }
+            to { opacity:1; transform:translateY(0) scale(1); }
+        }
+        
+        .chat-box.open {
+            display:flex;
+        }
+        
+        .chat-header {
+            background:linear-gradient(135deg, #00D4FF, var(--gold));
+            padding:14px 18px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            font-weight:600;
+            color:#000;
+            font-size:1.05rem;
+        }
+        
+        .chat-messages {
+            flex:1;
+            padding:15px;
+            overflow-y:auto;
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+        
+        .chat-msg {
+            padding:10px 15px;
+            border-radius:18px;
+            max-width:85%;
+            font-size:0.9rem;
+            line-height:1.6;
+        }
+        
+        .chat-msg.bot {
+            background:rgba(0,212,255,0.12);
+            align-self:flex-start;
+            border-bottom-left-radius:5px;
+            color:var(--text-dim);
+        }
+        
+        .chat-msg.user {
+            background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+            align-self:flex-end;
+            border-bottom-right-radius:5px;
+            color:#000;
+            font-weight:500;
+        }
+        
+        .chat-actions {
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            padding:12px 15px;
+            border-top:1px solid var(--border);
+        }
+        
+        .chat-action-btn {
+            background:rgba(0,212,255,0.1);
+            border:1px solid rgba(0,212,255,0.25);
+            padding:6px 14px;
+            border-radius:20px;
+            color:#00D4FF;
+            font-size:0.8rem;
+            cursor:pointer;
+            transition:var(--transition-fast);
+            font-weight:500;
+        }
+        
+        .chat-action-btn:hover {
+            background:rgba(0,212,255,0.2);
+            transform:translateY(-2px);
+        }
+        
+        .chat-input-area {
+            padding:12px 15px;
+            border-top:1px solid var(--border);
+            display:flex;
+            gap:10px;
+        }
+        
+        .chat-input-area input {
+            flex:1;
+            padding:10px 16px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid var(--border);
+            border-radius:22px;
+            color:var(--text);
+            font-size:0.95rem;
+        }
+        
+        .chat-input-area input:focus {
+            outline:none;
+            border-color:var(--gold);
+            background:rgba(255,255,255,0.09);
+        }
+        
+        .chat-input-area button {
+            width:42px;
+            height:42px;
+            border-radius:50%;
+            background:var(--gold);
+            border:none;
+            color:#000;
+            cursor:pointer;
+            transition:var(--transition-fast);
+            font-size:1.1rem;
+        }
+        
+        .chat-input-area button:hover {
+            transform:scale(1.1);
+            box-shadow:0 5px 20px rgba(212,175,55,0.5);
+        }
+        
+        /* ✨ مودال الجني */
+        .genie-modal {
+            position:fixed;
+            inset:0;
+            background:rgba(5,5,15,0.95);
+            z-index:100010;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            backdrop-filter:blur(15px);
+        }
+        
+        .genie-modal.show {
+            display:flex;
+            animation:fadeIn 0.4s ease;
+        }
+        
+        .genie-card {
+            background:var(--card-bg);
+            border:2px solid var(--gold);
+            border-radius:35px;
+            padding:40px 35px;
+            text-align:center;
+            max-width:480px;
+            width:90%;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 0 100px rgba(212,175,55,0.7), var(--shadow-deep);
+            animation:genieEnter 0.5s ease;
+        }
+        
+        @keyframes genieEnter {
+            from { opacity:0; transform:scale(0.9) translateY(30px); }
+            to { opacity:1; transform:scale(1) translateY(0); }
+        }
+        
+        .genie-smoke {
+            position:absolute;
+            inset:0;
+            background:radial-gradient(circle at 50% 50%, rgba(212,175,55,0.25), transparent 70%);
+            animation:genieSmoke 5s ease-in-out infinite;
+            pointer-events:none;
+            opacity:0.6;
+        }
+        
+        @keyframes genieSmoke {
+            0%,100% { opacity:0.4; transform:scale(1); }
+            50% { opacity:0.8; transform:scale(1.1); }
+        }
+        
+        .genie-card .genie-icon {
+            font-size:5rem;
+            margin-bottom:15px;
+            display:block;
+            animation:float 3s ease-in-out infinite;
+            filter:drop-shadow(0 0 30px rgba(212,175,55,0.6));
+        }
+        
+        @keyframes float {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-15px); }
+        }
+        
+        .genie-card .sheko-name {
+            font-size:2.3rem;
+            margin:10px 0;
+        }
+        
+        .genie-card p {
+            color:var(--text-dim);
+            margin:15px 0 25px;
+            font-size:1.05rem;
+        }
+        
+        .genie-card .contact-links {
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            margin-top:20px;
+        }
+        
+        .genie-card .contact-link {
+            color:var(--text);
+            text-decoration:none;
+            padding:12px 18px;
+            border:1px solid var(--border);
+            border-radius:18px;
+            background:rgba(255,255,255,0.04);
+            transition:var(--transition);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            font-weight:500;
+        }
+        
+        .genie-card .contact-link:hover {
+            border-color:var(--gold);
+            background:rgba(212,175,55,0.1);
+            transform:translateY(-3px);
+            box-shadow:0 10px 30px rgba(212,175,55,0.2);
+        }
+        
+        /* ✨ استجابة الشاشات */
+        @media (max-width: 768px) {
+            .nav-menu { display:none; }
+            .hero { padding:100px 15px 60px; }
+            .hero-btns { flex-direction:column; align-items:center; }
+            .btn { width:100%; max-width:280px; }
+            section { padding:60px 3%; }
+            .services-grid, .offers-grid, .reviews-grid { grid-template-columns:1fr; }
+            .chat-box { width:calc(100vw - 40px); right:10px; }
+            .flags-container { gap:15px; }
+            .flag-circle { width:50px; height:50px; font-size:1.5rem; }
+            .oil-drop-container { width:100px; height:140px; }
+            .oil-drop-logo { width:60px; height:85px; }
+            .oil-drop-logo::before { width:42px; height:42px; }
+            .oil-drop-body { width:52px; height:50px; top:38px; }
+        }
+        
+        /* ✨ تحسينات الوصول */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+        
+        /* ✨ مؤشر التحميل الذكي */
+        .loading-dots {
+            display:inline-flex;
+            gap:4px;
+        }
+        
+        .loading-dots span {
+            width:8px; height:8px;
+            border-radius:50%;
+            background:var(--gold);
+            animation:loadingDot 1.4s ease-in-out infinite;
+        }
+        
+        .loading-dots span:nth-child(2) { animation-delay:0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay:0.4s; }
+        
+        @keyframes loadingDot {
+            0%, 80%, 100% { transform:scale(0.6); opacity:0.5; }
+            40% { transform:scale(1.2); opacity:1; }
+        }
+        
+        /* ✨ فواصل زخرفية */
+        .decorative-divider {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:15px;
+            margin:40px 0;
+            opacity:0.6;
+        }
+        
+        .decorative-divider::before,
+        .decorative-divider::after {
+            content:'';
+            flex:1;
+            height:1px;
+            background:linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .decorative-divider span {
+            color:var(--gold);
+            font-size:1.2rem;
+        }
+    </style>
+</head>
+<body lang="ar" dir="rtl">
+    <!-- ✨ خلفية الضباب الذهبي -->
+    <div class="ambient-glow"></div>
+    <div class="noise-overlay"></div>
+    
+    <!-- ✨ عناصر زخرفية عائمة لملء المساحات الفارغة -->
+    <div class="floating-decor">✨</div>
+    <div class="floating-decor">🌹</div>
+    <div class="floating-decor">💫</div>
+    <div class="floating-decor">🦋</div>
+    <div class="floating-decor">🌸</div>
+    
+    <!-- ✨ شريط تقدم التمرير -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- ✨ شاشة التحميل -->
+    <div id="preloader">
+        <div class="oil-drop-container">
+            <div class="oil-drop-logo">
+                <div class="oil-drop-body"></div>
+                <div class="oil-drop-tip"></div>
+                <div class="oil-drop-glow"></div>
+                <div class="oil-particles">
+                    <div class="oil-particle"></div>
+                    <div class="oil-particle"></div>
+                    <div class="oil-particle"></div>
+                    <div class="oil-particle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="loader-text">SENSORA SPA</div>
+        <p class="loader-subtitle">Touch That Heals</p>
+        <div class="loading-dots" style="margin-top:25px">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    
+    <!-- ✨ طبقة اختيار الموسيقى -->
+    <div class="music-overlay" id="musicOverlay">
+        <div class="music-card">
+            <h3>🎵 موسيقى الاسترخاء</h3>
+            <p>هل ترغب في تفعيل الموسيقى الهادئة لتعزيز تجربة الاسترخاء؟</p>
+            <div class="music-btns">
+                <button class="btn btn-gold" onclick="enableMusic()">
+                    <i class="fas fa-play"></i> تشغيل
+                </button>
+                <button class="btn btn-outline" onclick="skipMusic()">
+                    <i class="fas fa-forward"></i> تخطي
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ✨ مشغل الموسيقى -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- ✨ كانفاس الجسيمات -->
+    <canvas id="natureCanvas"></canvas>
+
+    <!-- ✨ شريط التنقل -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <div class="nav-oil"></div>
+            <span class="nav-logo-text">SENSORA SPA</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+            <li><a href="#services" class="nav-link">الخدمات</a></li>
+            <li><a href="#offers" class="nav-link">العروض</a></li>
+            <li><a href="#therapists" class="nav-link">المختصات</a></li>
+        </ul>
+        <div>
+            <button class="lang-btn active" aria-label="اللغة العربية">عربي</button>
+            <button class="lang-btn" aria-label="English">EN</button>
+        </div>
+    </nav>
+
+    <!-- ✨ الأزرار العائمة -->
+    <button class="float-btn music-float" id="musicFloatBtn" onclick="toggleMusic()" style="left:25px" aria-label="تشغيل/إيقاف الموسيقى">
+        <i class="fas fa-music"></i>
+    </button>
+    <a href="https://wa.me/966545049837" class="float-btn whatsapp-float" target="_blank" aria-label="تواصل عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="float-btn theme-toggle" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي/النهاري">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- ✨ قسم الهيرو -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-map-marker-alt"></i>
+                الرياض، المملكة العربية السعودية
+            </div>
+            <h1>SENSORA SPA</h1>
+            <p>Touch That Heals</p>
+            <div class="vip-badge">
+                <i class="fas fa-car"></i>
+                خدمة متنقلة VIP – نصل إليك أينما كنت
+            </div>
+            <p class="hero-desc">
+                علاج مساج فاخر في منزلك، فندقك. مختصات معتمدون، زيوت فاخرة، وجلسات شفاء مخصصة لتجربة لا تُنسى.
+            </p>
+            <div class="hero-btns">
+                <a href="#offers" class="btn btn-gold" onclick="scrollToSection('offers')">
+                    <i class="fas fa-calendar-check"></i> احجز الآن
+                </a>
+                <a href="#services" class="btn btn-outline" onclick="scrollToSection('services')">
+                    <i class="fas fa-spa"></i> استكشف الخدمات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ✨ قسم الخدمات -->
+    <section id="services">
+        <div class="section-header">
+            <span class="section-label">ماذا نقدم</span>
+            <h2>خدماتنا الفاخرة</h2>
+        </div>
+        <div class="decorative-divider"><span>❖</span></div>
+        <div class="services-grid" id="servicesGrid"></div>
+    </section>
+    
+    <!-- ✨ قسم العروض -->
+    <section id="offers" style="background:rgba(212,175,55,0.02)">
+        <div class="section-header">
+            <span class="section-label">باقات حصرية</span>
+            <h2>الباقات الفاخرة</h2>
+        </div>
+        <div class="decorative-divider"><span>❖</span></div>
+        <div class="offers-grid" id="offersGrid"></div>
+    </section>
+    
+    <!-- ✨ قسم المختصات -->
+    <section id="therapists">
+        <div class="section-header">
+            <span class="section-label">فريقنا المحترف</span>
+            <h2>المختصات المعتمدات</h2>
+        </div>
+        <p style="text-align:center;color:var(--text-dim);max-width:700px;margin:0 auto 25px;font-size:1.05rem">
+            نخبة من الخبراء من 
+            <span style="color:var(--gold);font-weight:600">السعودية • روسيا • تركيا • تونس • الجزائر • المغرب • الفلبين</span>
+        </p>
+        <div class="decorative-divider"><span>❖</span></div>
+        <div class="flags-container" id="flagsContainer"></div>
+        <div style="text-align:center;margin-top:30px">
+            <button class="btn btn-gold" onclick="openTherapistModal('all');scrollToModal()">
+                <i class="fas fa-user-md"></i> اختر المختصة المحترفة
+            </button>
+        </div>
+    </section>
+
+    <!-- ✨ إحصائيات العملاء -->
+    <div class="stats-box">
+        <h3 class="stats-title">👥 عملاؤنا السعداء</h3>
+        <span class="stats-number" id="clientsCount">0</span>
+        <p class="stats-subtitle">عميل سعيد في الرياض والمملكة</p>
+    </div>
+
+    <!-- ✨ آراء العملاء -->
+    <div class="reviews-section">
+        <h3>🗣️ ماذا يقول عملاؤنا</h3>
+        <div class="divider" style="width:80px;height:2px;background:var(--gold);margin:15px auto"></div>
+    </div>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"تجربة لا تُنسى! المساج السويدي أعاد لي طاقتي وهدوء أعصابي. الفريق محترف للغاية والاهتمام بالتفاصيل مذهل."</p>
+            <div class="review-author">- ريم القحطاني</div>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"جربت الحجارة الساخنة لأول مرة وكانت تجربة سحرية. التوتر والقلق اختفيا تماماً، أشعر بتجدد كامل."</p>
+            <div class="review-author">- محمد العتيبي</div>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"أفضل سبا متنقل في الرياض بلا منازع. المختصات من روسيا رائعات، والأسعار تناسب الجودة العالية المقدمة."</p>
+            <div class="review-author">- نورة الشمري</div>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"الحمام المغربي الفاخر نقلني إلى مراكش! الجودة استثنائية والزيوت العطرية أصلية ورائحتها تدوم طويلاً."</p>
+            <div class="review-author">- عبدالله السبيعي</div>
+        </div>
+    </div>
+
+    <!-- ✨ صندوق التعليقات -->
+    <div class="comment-box">
+        <h3><i class="fas fa-pen-fancy"></i> شاركنا تجربتك</h3>
+        <textarea id="commentText" placeholder="اكتب تعليقك هنا... نحن نستمع إليك ✨"></textarea>
+        <button class="btn btn-gold" onclick="submitComment()">
+            <i class="fas fa-paper-plane"></i> أرسل تعليقك
+        </button>
+    </div>
+
+    <!-- ✨ صندوق الاشتراك -->
+    <div class="subscribe-box">
+        <h3><i class="fas fa-gift"></i> احصل على عروض حصرية</h3>
+        <input type="tel" id="subscribePhone" placeholder="أدخل رقم جوالك (05xxxxxxxx)">
+        <button class="btn btn-gold" onclick="subscribeWhatsApp()">
+            <i class="fab fa-whatsapp"></i> اشترك الآن
+        </button>
+    </div>
+
+    <!-- ✨ الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SENSORA SPA</h4>
+                <p>لمسة تشفي. تجربة عافية متنقلة فاخرة في قلب الرياض.</p>
+            </div>
+            <div class="footer-section">
+                <h4>تواصل معنا</h4>
+                <a href="https://wa.me/966545049837"><i class="fab fa-whatsapp"></i> 966545049837</a>
+                <a href="mailto: sensoraspa@gmail.com"><i class="fas fa-envelope"></i> sensoraspa@gmail.com</a>
+            </div>
+            <div class="footer-section">
+                <h4>ساعات العمل</h4>
+                <p>يومياً: 04:00 م - 05:00 ص</p>
+                <p>حجز مسبق مطلوب</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Sensora Spa | جميع الحقوق محفوظة | صُمم بـ <i class="fas fa-heart" style="color:var(--gold)"></i>
+        </div>
+    </footer>
+
+    <!-- ✨ توقيع Sheko -->
+    <div class="sheko-footer">
+        <div class="sheko-name">S H E K O</div>
+        <p>تصميم وتطوير فاخر</p>
+        <button class="btn btn-outline" onclick="openGenieModal()">
+            <i class="fas fa-magic"></i> أعجبك التصميم؟ تواصل معي
+        </button>
+    </div>
+
+    <!-- ✨ مودال الجني -->
+    <div class="genie-modal" id="genieModal">
+        <div class="genie-card">
+            <div class="genie-smoke"></div>
+            <button class="modal-close" onclick="closeGenieModal()" aria-label="إغلاق">×</button>
+            <span class="genie-icon">🧞‍♂️</span>
+            <div class="sheko-name">S H E K O</div>
+            <p>مصمم ومطور واجهات فاخرة – لمشروعك القادم</p>
+            <div class="contact-links">
+                <a href="mailto:abu.fahad38906@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> abu.fahad38906@gmail.com
+                </a>
+                <a href="https://wa.me/966535400767?text=أعجبني تصميم Sensora Spa وأريد استشارة" class="contact-link">
+                    <i class="fab fa-whatsapp"></i> 0535400767
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✨ الدردشة الذكية -->
+    <div class="chat-widget">
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <i class="fas fa-robot"></i>
+                مساعد Sensora الذكي
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-actions">
+                <button class="chat-action-btn" onclick="askAI('ألم الظهر')">ألم الظهر</button>
+                <button class="chat-action-btn" onclick="askAI('التوتر')">التوتر</button>
+                <button class="chat-action-btn" onclick="askAI('ألم الرقبة')">ألم الرقبة</button>
+                <button class="chat-action-btn" onclick="askAI('ألم القدمين')">ألم القدمين</button>
+                <button class="chat-action-btn" onclick="askAI('الأسعار')">الأسعار</button>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="صف شعورك أو استفسارك..." onkeypress="if(event.key==='Enter')sendChat()">
+                <button onclick="sendChat()" aria-label="إرسال">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="chat-toggle" onclick="toggleChat()" aria-label="فتح الدردشة">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+    
+    <!-- ✨ شاشة الشكر -->
+    <div class="thanks-overlay" id="thanksOverlay">
+        <div class="thanks-card">
+            <span class="icon">💛</span>
+            <h3>شكراً لثقتك</h3>
+            <p>فريق Sensora Spa سيتواصل معك خلال دقائق لتأكيد حجزك</p>
+            <button class="btn btn-gold" onclick="closeThanks()">
+                <i class="fas fa-check"></i> استمر في التصفح
+            </button>
+        </div>
+    </div>
+    
+    <!-- ✨ مودال الفوائد -->
+    <div class="modal" id="benefitsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('benefitsModal')" aria-label="إغلاق">×</button>
+            <h3 class="modal-title">✨ فوائد هذه الجلسة</h3>
+            <div id="benefitsContent"></div>
+        </div>
+    </div>
+    
+    <!-- ✨ مودال رحلة الشفاء -->
+    <div class="modal" id="journeyModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('journeyModal')" aria-label="إغلاق">×</button>
+            <h3 class="modal-title">🛤️ رحلة الشفاء</h3>
+            <div id="journeyContent"></div>
+        </div>
+    </div>
+    
+    <!-- ✨ مودال الحجز -->
+    <div class="modal" id="therapistModal">
+        <div class="modal-content" id="therapistModalContent">
+            <button class="modal-close" onclick="closeTherapistModal()" aria-label="إغلاق">×</button>
+            
+            <!-- الخطوة 1: عدد المختصات -->
+            <div id="stepCount">
+                <h3 class="modal-title">اختر عدد المختصات</h3>
+                <p style="text-align:center;color:var(--text-dim);margin-bottom:25px">
+                    يمكنك اختيار من مختصة واحدة إلى ثلاث مختصات لجلسة أكثر شمولاً
+                </p>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                    <button class="btn btn-outline" onclick="setTherapistCount(1)">
+                        <i class="fas fa-user-md"></i> واحدة
+                    </button>
+                    <button class="btn btn-outline" onclick="setTherapistCount(2)">
+                        <i class="fas fa-user-md"></i><i class="fas fa-user-md" style="margin-right:-8px"></i> اثنتين
+                    </button>
+                    <button class="btn btn-outline" onclick="setTherapistCount(3)">
+                        <i class="fas fa-user-md"></i><i class="fas fa-user-md" style="margin-right:-8px"></i><i class="fas fa-user-md" style="margin-right:-8px"></i> ثلاث
+                    </button>
+                </div>
+            </div>
+            
+            <!-- الخطوة 2: اختيار المختصات -->
+            <div id="stepSelect" style="display:none">
+                <h3 class="modal-title">اختر المختصة المحترفة</h3>
+                <p style="text-align:center;color:var(--text-dim);margin-bottom:20px">
+                    اختر <span id="requiredCount" style="color:var(--gold);font-weight:700">1</span> مختصة
+                </p>
+                <div class="therapist-grid" id="therapistGrid"></div>
+                <button class="btn btn-gold" style="margin-top:20px;width:100%" onclick="confirmTherapists()">
+                    <i class="fas fa-check"></i> تأكيد الاختيار
+                </button>
+            </div>
+            
+            <!-- الخطوة 3: اختيار الخدمات -->
+            <div id="stepServices" style="display:none">
+                <h3 class="modal-title">اختر الخدمات المطلوبة</h3>
+                <div id="servicesPerTherapist"></div>
+                <button class="btn btn-gold" style="margin-top:20px;width:100%" onclick="confirmServices()">
+                    <i class="fas fa-check"></i> تأكيد الخدمات
+                </button>
+            </div>
+            
+            <!-- الخطوة 4: الوقت والسعر -->
+            <div id="stepTime" style="display:none">
+                <h3 class="modal-title">اختر وقت الجلسة</h3>
+                <div class="time-grid" id="timeSelect"></div>
+                
+                <div class="price-display" id="priceDisplay" style="display:none">
+                    <span>السعر الإجمالي (بعد خصم 50 ريال):</span>
+                    <span class="price-amount" id="totalPrice">0 SAR</span>
+                </div>
+                
+                <div style="display:flex;gap:12px;justify-content:center;margin-top:25px;flex-wrap:wrap">
+                    <button class="btn btn-outline" onclick="goBackToServices()">
+                        <i class="fas fa-arrow-right"></i> رجوع
+                    </button>
+                    <button class="btn btn-gold" id="whatsappBtn" style="display:none" onclick="sendBookWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> إرسال الطلب
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ✨ بيانات الخدمات
+        const services = [
+            {id:'relaxing',icon:'💆‍♂️',price:450,title:'المساج الاسترخائي',benefits:['يهدئ الأعصاب ويقلل التوتر','يحسن جودة النوم','يعزز المزاج العام'],journey:['استشارة أولية','تحديد مناطق التوتر','تطبيق زيوت مهدئة','حركات دائرية ناعمة','تنفس عميق وتوجيه','نهاية هادئة']},
+            {id:'aroma',icon:'🌿',price:450,title:'العلاج العطري',benefits:['يقلل القلق والتوتر','يحسن التركيز والمزاج','يرطب البشرة برائحة فاخرة'],journey:['استشارة اختيار الرائحة','مزج الزيوت العطرية','جلسة استنشاق علاجية','مساج عطري متكامل','توازن العقل والجسد']},
+            {id:'swedish',icon:'🤲',price:450,title:'المساج السويدي',benefits:['يحسن الدورة الدموية','يقلل آلام العضلات','يزيد مرونة الجسم'],journey:['تقييم الحالة الصحية','اختيار الزيوت المناسبة','ضربات دافئة ومتناغمة','تقنيات العجن اللطيفة','النقر الإيقاعي','تبريد واسترخاء']},
+            {id:'thai',icon:'🧘‍♂️',price:450,title:'المساج التايلاندي',benefits:['يحسن المرونة والحركة','ينشط طاقة الجسم','يخفف آلام المفاصل'],journey:['تقييم تدفق الطاقة','تمددات اليوغا اللطيفة','ضغط نقاط الإبر الصينية','تحريك المفاصل بلطف','نهاية تنشيطية']},
+            {id:'hotstone',icon:'🔥',price:450,title:'الحجارة الساخنة',benefits:['استرخاء عميق للعضلات','يخفف آلام المفاصل المزمنة','يحسن جودة النوم'],journey:['معايرة درجة حرارة الحجارة','وضع الحجارة الاستراتيجية','تدليك انزلاقي دافئ','اختراق حراري عميق','استرخاء نهائي']},
+            {id:'deep',icon:'💪',price:450,title:'الأنسجة العميقة',benefits:['يعالج آلام العضلات المزمنة','يقلل تصلب المفاصل','يسرع التعافي بعد الرياضة'],journey:['تقييم الوضعية والحركة','تطبيق زيوت خاصة','ضغط عميق ومركز','تقنيات اللفافة العضلية','تمددات علاجية']},
+            {id:'pedicure',icon:'🦶',price:450,title:'الباديكير الفاخر',benefits:['قدمين ناعمتين كالحرير','عناية شاملة بالأظافر','منع التشققات والجفاف'],journey:['نقع القدمين بأملاح فاخرة','تقشير لطيف للبشرة','عناية احترافية بالأظافر','تدليك منعش للقدمين','ترطيب عميق بالزيوت']},
+            {id:'hair_removal',icon:'✨',price:350,title:'إزالة الشعر',benefits:['بشرة ناعمة ومشرقة','نتائج تدوم طويلاً','راحة تامة وخصوصية'],journey:['تقييم نوع البشرة','تنظيف وتعقيم المنطقة','تطبيق منتج عالي الجودة','إزالة دقيقة للشعر','ترطيب وتهدئة البشرة']},
+            {id:'full_body_hair',icon:'🌟',price:1100,title:'إزالة شعر الجسم كامل',benefits:['نعومة كاملة للجسم','نتائج تدوم لأسابيع','استرخاء وراحة شاملة'],journey:['استشارة خاصة','تحضير البشرة بعناية','تطبيق التقنية المناسبة','ترطيب عميق بعد الجلسة','نصائح للعناية المنزلية']},
+            {id:'steam_bath',icon:'💨',price:450,title:'حمام البخار',benefits:['فتح المسام وتنقية البشرة','إزالة السموم من الجسم','ترطيب عميق للبشرة'],journey:['الإعداد والتهيئة','الجلوس في البخار الدافئ','استرخاء عميق للجسم','شطف بارد منشط','فترة راحة هادئة']},
+            {id:'moroccan_bath',icon:'🛁',price:450,title:'الحمام المغربي',benefits:['تنقية عميقة للبشرة','إزالة الخلايا الميتة','استرخاء كامل للجسد'],journey:['الاستعداد بالبخار','التقشير التقليدي بالليفة','تطبيق الصابون الأسود','الشطف بالماء الدافئ','الترطيب بالزيوت المغربية']}
+        ];
+        
+        // ✨ بيانات المختصات
+        const therapists = {
+            ksa:[{name:'ريم',age:23,avatar:'👩‍🦰',nation:'السعودية',price:450},{name:'رغد',age:25,avatar:'👩‍',nation:'السعودية',price:450},{name:'ليان',age:22,avatar:'👩‍🦱',nation:'السعودية',price:450}],
+            ru:[{name:'آنا',age:24,avatar:'👩‍🦳',nation:'روسيا',price:500},{name:'إيكاترينا',age:26,avatar:'👩‍🦰',nation:'روسيا',price:500}],
+            tr:[{name:'زينب',age:23,avatar:'👩‍',nation:'تركيا',price:500},{name:'إيلين',age:25,avatar:'👩‍🦱',nation:'تركيا',price:500}],
+            tn:[{name:'أمينة',age:22,avatar:'👩‍',nation:'تونس',price:450},{name:'سلمى',age:24,avatar:'👩‍',nation:'تونس',price:450}],
+            dz:[{name:'ياسمين',age:23,avatar:'👩‍',nation:'الجزائر',price:450},{name:'لينا',age:25,avatar:'👩',nation:'الجزائر',price:450}],
+            ma:[{name:'مريم',age:22,avatar:'👩',nation:'المغرب',price:450},{name:'هدى',age:24,avatar:'👩‍',nation:'المغرب',price:450}],
+            ph:[{name:'ماريا',age:23,avatar:'👩‍',nation:'الفلبين',price:450},{name:'جيسيكا',age:25,avatar:'👩‍🎤',nation:'الفلبين',price:450}]
+        };
+        
+        // ✨ المتغيرات العامة
+        let allTherapists=[],selectedTherapists=[],therapistCount=1,servicesPerTherapist={},selectedTime='',musicPlaying=false;
+
+        // ✨ دالة التمرير السلس للأقسام
+        function scrollToSection(sectionId) {
+            event.preventDefault();
+            const section = document.getElementById(sectionId);
+            if(section) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const sectionTop = section.offsetTop - navbarHeight - 20;
+                window.scrollTo({
+                    top: sectionTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // ✨ دالة التمرير للمودال
+        function scrollToModal() {
+            setTimeout(() => {
+                const modal = document.getElementById('therapistModal');
+                if(modal && modal.classList.contains('open')) {
+                    modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 400);
+        }
+
+        // ✨ تهيئة كانفاس الجسيمات الطبيعية
+        function initNature(){
+            const c=document.getElementById('natureCanvas'),ctx=c.getContext('2d');
+            c.width=innerWidth;c.height=innerHeight;
+            const drops=[];
+            const symbols=['🌸','🌹','🌺','💮','🏵️','🍂','🍁','🌿','❄️','✨','💧','🦋'];
+            
+            for(let i=0;i<120;i++){
+                drops.push({
+                    x:Math.random()*c.width,
+                    y:Math.random()*-c.height,
+                    speed:Math.random()*1.5+0.8,
+                    symbol:symbols[Math.floor(Math.random()*symbols.length)],
+                    size:Math.random()*22+16,
+                    opacity:Math.random()*0.5+0.3,
+                    sway:Math.random()*0.02-0.01
+                });
+            }
+            
+            function draw(){
+                ctx.clearRect(0,0,c.width,c.height);
+                drops.forEach(d=>{
+                    ctx.font=`${d.size}px serif`;
+                    ctx.fillStyle=`rgba(212,175,55,${d.opacity})`;
+                    ctx.fillText(d.symbol,d.x,d.y);
+                    d.y+=d.speed;
+                    d.x+=Math.sin(d.y*0.01)*d.sway*10;
+                    if(d.y>c.height+50){
+                        d.y=-30;
+                        d.x=Math.random()*c.width;
+                        d.opacity=Math.random()*0.5+0.3;
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+            addEventListener('resize',()=>{c.width=innerWidth;c.height=innerHeight});
+        }
+
+        // ✨ عرض الخدمات مع ربط الحجز بالتمرير
+        function renderServices(){
+            document.getElementById('servicesGrid').innerHTML=services.map(s=>`
+                <div class="service-card">
+                    <span class="service-icon">${s.icon}</span>
+                    <h3>${s.title}</h3>
+                    <span class="service-price">${s.price} SAR</span>
+                    <p style="min-height:50px">جلسة علاجية متخصصة لتجربة استرخاء فاخرة</p>
+                    <div class="service-actions">
+                        <button class="btn btn-outline btn-sm" onclick="showBenefits('${s.id}')">
+                            <i class="fas fa-lightbulb"></i> الفوائد
+                        </button>
+                        <button class="btn btn-outline btn-sm" onclick="showJourney('${s.id}')">
+                            <i class="fas fa-route"></i> الرحلة
+                        </button>
+                        <button class="btn btn-gold btn-sm" onclick="openTherapistModal('all');setTimeout(()=>{confirmServicesForDirect('${s.id}');scrollToModal();},300)">
+                            <i class="fab fa-whatsapp"></i> احجز
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ✨ دالة مساعدة للحجز المباشر من الخدمة
+        function confirmServicesForDirect(serviceId) {
+            // تهيئة المتغيرات للحجز المباشر
+            therapistCount = 1;
+            selectedTherapists = [];
+            servicesPerTherapist = {};
+            selectedTime = '';
+            
+            // اختيار أول مختصة متاحة تلقائياً
+            if(allTherapists.length > 0) {
+                selectedTherapists.push(allTherapists[0]);
+                servicesPerTherapist[0] = serviceId;
+                
+                // الانتقال للخطوة التالية
+                document.getElementById('stepSelect').style.display = 'none';
+                document.getElementById('stepServices').style.display = 'block';
+                renderServicesPerTherapist();
+                
+                // تحديد الخدمة المختارة
+                setTimeout(() => {
+                    const option = document.getElementById(`svc-0-${serviceId}`);
+                    if(option) {
+                        option.click();
+                        setTimeout(() => confirmServices(), 200);
+                    }
+                }, 300);
+            }
+        }
+        
+        // ✨ عرض العروض
+        function renderOffers(){
+            const offers=[
+                {name:'الباقة الأساسية',dur:'60 دقيقة',price:'400',save:'وفر 50 ريال (أصلي 450)',popular:false},
+                {name:'الساعة المزدوجة',dur:'120 دقيقة',price:'850',save:'وفر 50 ريال (أصلي 900) ⭐',popular:true},
+                {name:'الباقة الملكية',dur:'150 دقيقة',price:'1300',save:'وفر 50 ريال (أصلي 1350)',popular:false},
+                {name:'VIP شهري',dur:'4 جلسات',price:'1750',save:'وفر 50 ريال (أصلي 1800) 🔥',popular:false},
+                {name:'إزالة شعر كامل الجسم',dur:'جلسة واحدة',price:'1050',save:'وفر 50 ريال (أصلي 1100)',popular:false}
+            ];
+            document.getElementById('offersGrid').innerHTML=offers.map(o=>`
+                <div class="offer-card ${o.popular?'popular':''}">
+                    ${o.popular?'<div class="offer-badge"><i class="fas fa-fire"></i> الأكثر طلباً</div>':''}
+                    <h3>${o.name}</h3>
+                    <p style="color:var(--text-dim);margin:8px 0">${o.dur}</p>
+                    <span class="offer-price">${o.price} <span style="font-size:1rem">SAR</span></span>
+                    <p style="color:#2ecc71;font-weight:600;margin:10px 0">${o.save}</p>
+                    <div style="padding:15px 0">
+                        <a href="https://wa.me/966545049837" class="btn btn-gold" style="width:100%;justify-content:center" onclick="showThanks()">
+                            <i class="fab fa-whatsapp"></i> احجز الآن
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ✨ عرض أعلام الدول
+        function renderFlags(){
+            const f={ksa:'🇸🇦 السعودية',ru:'🇷🇺 روسيا',tr:'🇹🇷 تركيا',tn:'🇹🇳 تونس',dz:'🇩🇿 الجزائر',ma:'🇲🇦 المغرب',ph:'🇵🇭 الفلبين'};
+            document.getElementById('flagsContainer').innerHTML=Object.entries(f).map(([k,v])=>`
+                <div class="flag-item" onclick="openTherapistModal('${k}');scrollToModal()" role="button" tabindex="0">
+                    <div class="flag-circle">${v.split(' ')[0]}</div>
+                    <span>${v.split(' ')[1]}</span>
+                </div>
+            `).join('');
+        }
+
+        // ✨ عرض الفوائد
+        function showBenefits(id){
+            const s=services.find(x=>x.id===id);
+            document.getElementById('benefitsContent').innerHTML=s.benefits.map(b=>`
+                <div style="background:rgba(212,175,55,0.08);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;margin:8px 0">
+                    <i class="fas fa-sparkles" style="color:var(--gold);margin-bottom:8px;display:block"></i>
+                    ${b}
+                </div>
+            `).join('');
+            document.getElementById('benefitsModal').classList.add('open');
+        }
+        
+        // ✨ عرض رحلة الشفاء
+        function showJourney(id){
+            const s=services.find(x=>x.id===id);
+            document.getElementById('journeyContent').innerHTML=s.journey.map((st,i)=>`
+                <div style="margin-bottom:18px;position:relative;padding-right:25px">
+                    <div style="position:absolute;right:-32px;top:3px;width:24px;height:24px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:0.75rem;box-shadow:0 0 15px rgba(212,175,55,0.5)">${i+1}</div>
+                    <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:12px 15px;border-left:2px solid var(--gold)">
+                        <h4 style="color:var(--gold);font-size:1.05rem">${st}</h4>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('journeyModal').classList.add('open');
+        }
+        
+        // ✨ إغلاق المودال
+        function closeModal(id){
+            document.getElementById(id).classList.remove('open');
+        }
+
+        // ✨ فتح مودال المختصات
+        function openTherapistModal(country){
+            selectedTherapists=[];
+            therapistCount=1;
+            servicesPerTherapist={};
+            selectedTime='';
+            document.getElementById('stepCount').style.display='block';
+            document.getElementById('stepSelect').style.display='none';
+            document.getElementById('stepServices').style.display='none';
+            document.getElementById('stepTime').style.display='none';
+            document.getElementById('whatsappBtn').style.display='none';
+            document.getElementById('priceDisplay').style.display='none';
+            allTherapists=country==='all'?Object.values(therapists).flat():(therapists[country]||[]);
+            document.getElementById('therapistModal').classList.add('open');
+        }
+        
+        // ✨ تحديد عدد المختصات
+        function setTherapistCount(c){
+            therapistCount=c;
+            selectedTherapists=[];
+            document.getElementById('requiredCount').textContent=c;
+            document.getElementById('stepCount').style.display='none';
+            document.getElementById('stepSelect').style.display='block';
+            renderTherapistGrid();
+            modalScrollTo('stepSelect');
+        }
+        
+        // ✨ عرض شبكة المختصات
+        function renderTherapistGrid(){
+            document.getElementById('therapistGrid').innerHTML=allTherapists.map((t,i)=>`
+                <div class="therapist-card" id="th-${i}" onclick="toggleTherapist(${i})" role="button" tabindex="0">
+                    <span class="avatar">${t.avatar}</span>
+                    <div class="name">${t.name}</div>
+                    <div class="nation">${t.nation}</div>
+                    <div class="price">${t.price} SAR</div>
+                </div>
+            `).join('');
+        }
+        
+        // ✨ تبديل اختيار المختصة
+        function toggleTherapist(i){
+            const t=allTherapists[i];
+            const card=document.getElementById('th-'+i);
+            if(selectedTherapists.includes(t)){
+                selectedTherapists=selectedTherapists.filter(x=>x!==t);
+                card.classList.remove('selected');
+            }else{
+                if(selectedTherapists.length>=therapistCount)return;
+                selectedTherapists.push(t);
+                card.classList.add('selected');
+            }
+        }
+        
+        // ✨ تأكيد اختيار المختصات
+        function confirmTherapists(){
+            if(selectedTherapists.length!==therapistCount)return;
+            document.getElementById('stepSelect').style.display='none';
+            document.getElementById('stepServices').style.display='block';
+            renderServicesPerTherapist();
+            modalScrollTo('stepServices');
+        }
+        
+        // ✨ عرض الخدمات لكل مختصة
+        function renderServicesPerTherapist(){
+            document.getElementById('servicesPerTherapist').innerHTML=selectedTherapists.map((t,i)=>`
+                <div style="margin-bottom:20px;padding:18px;background:rgba(212,175,55,0.06);border-radius:20px;border:1px solid var(--border)">
+                    <h4 style="color:var(--gold);margin-bottom:12px;font-size:1.1rem">
+                        ${t.avatar} ${t.name} <span style="color:var(--text-dim);font-weight:400">(${t.nation})</span>
+                    </h4>
+                    <div class="service-option-grid">
+                        ${services.map(s=>`
+                            <div class="service-option" id="svc-${i}-${s.id}" onclick="selectServiceForTherapist(${i},'${s.id}')" role="button" tabindex="0">
+                                <span class="icon">${s.icon}</span>
+                                <span class="title">${s.title}</span>
+                                <strong class="price">${s.price} SAR</strong>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ✨ اختيار خدمة لمختصة
+        function selectServiceForTherapist(i,sid){
+            document.querySelectorAll(`[id^="svc-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+            document.getElementById(`svc-${i}-${sid}`).classList.add('selected');
+            servicesPerTherapist[i]=sid;
+        }
+        
+        // ✨ تأكيد اختيار الخدمات
+        function confirmServices(){
+            if(Object.keys(servicesPerTherapist).length!==therapistCount)return;
+            document.getElementById('stepServices').style.display='none';
+            document.getElementById('stepTime').style.display='block';
+            document.getElementById('timeSelect').innerHTML=['4:00 م','6:00 م','8:00 م','10:00 م','12:00 ص','2:00 ص','4:00 ص'].map(t=>`
+                <div class="time-option" onclick="selectTime('${t}')" role="button" tabindex="0">${t}</div>
+            `).join('');
+            modalScrollTo('stepTime');
+        }
+        
+        // ✨ اختيار وقت الجلسة
+        function selectTime(t){
+            selectedTime=t;
+            document.querySelectorAll('.time-option').forEach(el=>el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            updatePrice();
+        }
+        
+        // ✨ تحديث السعر
+        function updatePrice(){
+            let total=0;
+            for(let i=0;i<therapistCount;i++){
+                total+=selectedTherapists[i].price;
+            }
+            if(therapistCount>1)total-=50;
+            total=Math.max(0,total);
+            document.getElementById('priceDisplay').style.display='block';
+            document.getElementById('totalPrice').textContent=total+' SAR';
+            document.getElementById('whatsappBtn').style.display='inline-flex';
+            modalScrollTo('priceDisplay');
+        }
+        
+        // ✨ إرسال الحجز عبر واتساب
+        function sendBookWhatsApp(){
+            let msg='*حجز جديد - Sensora Spa* ✨\n\n';
+            selectedTherapists.forEach((t,i)=>{
+                const s=services.find(x=>x.id===servicesPerTherapist[i]);
+                msg+=`👩‍⚕️ ${t.name} (${t.nation})\n🧴 ${s.title}\n💰 ${t.price} SAR\n\n`;
+            });
+            msg+=`⏰ الوقت المطلوب: ${selectedTime}\n💎 السعر الإجمالي: ${document.getElementById('totalPrice').textContent}`;
+            window.open(`https://wa.me/966545049837?text=${encodeURIComponent(msg)}`,'_blank');
+            showThanks();
+        }
+        
+        // ✨ العودة لاختيار الخدمات
+        function goBackToServices(){
+            document.getElementById('stepServices').style.display='block';
+            document.getElementById('stepTime').style.display='none';
+            modalScrollTo('stepServices');
+        }
+        
+        // ✨ إغلاق مودال الحجز
+        function closeTherapistModal(){
+            document.getElementById('therapistModal').classList.remove('open');
+        }
+        
+        // ✨ التمرير داخل المودال
+        function modalScrollTo(id){
+            setTimeout(()=>{
+                const el=document.getElementById(id);
+                const container=document.getElementById('therapistModalContent');
+                if(el&&container){
+                    container.scrollTo({
+                        top:el.offsetTop-container.offsetTop-40,
+                        behavior:'smooth'
+                    });
+                }
+            },150);
+        }
+        
+        // ✨ عرض شاشة الشكر
+        function showThanks(){
+            document.getElementById('thanksOverlay').classList.add('show');
+        }
+        
+        // ✨ إغلاق شاشة الشكر
+        function closeThanks(){
+            document.getElementById('thanksOverlay').classList.remove('show');
+        }
+
+        // ✨ تهيئة الدردشة
+        function initChat(){
+            document.getElementById('chatMessages').innerHTML=`
+                <div class="chat-msg bot">
+                    🤖 مرحباً بك في Sensora Spa! أنا مساعدك الذكي. 
+                    <br><br>صف لي شعورك أو ألمك لأقترح لك العلاج الأنسب ✨
+                </div>
+            `;
+        }
+        
+        // ✨ تبديل الدردشة
+        function toggleChat(){
+            document.getElementById('chatBox').classList.toggle('open');
+        }
+        
+        // ✨ سؤال الذكاء الاصطناعي
+        function askAI(t){
+            document.getElementById('chatInput').value=t;
+            sendChat();
+        }
+        
+        // ✨ إرسال رسالة الدردشة
+        function sendChat(){
+            const input=document.getElementById('chatInput');
+            const text=input.value.trim();
+            if(!text)return;
+            
+            const chat=document.getElementById('chatMessages');
+            chat.innerHTML+=`<div class="chat-msg user">${text}</div>`;
+            input.value='';
+            chat.scrollTop=chat.scrollHeight;
+            
+            setTimeout(()=>{
+                chat.innerHTML+=`<div class="chat-msg bot">${genAI(text)}</div>`;
+                chat.scrollTop=chat.scrollHeight;
+            },800);
+        }
+        
+        // ✨ توليد رد الذكاء الاصطناعي
+        function genAI(t){
+            if(t.includes('ظهر')||t.includes('ظهر'))return'🔍 <strong>ألم الظهر:</strong> ننصح بـ <em>الأنسجة العميقة + الحجارة الساخنة</em> لتخفيف التوتر العضلي العميق. <a href="https://wa.me/966545049837" style="color:var(--gold);text-decoration:none">احجز الآن</a>';
+            if(t.includes('توتر')||t.includes('قلق'))return'🧠 <strong>التوتر والقلق:</strong> العلاج العطري مع المساج الاسترخائي هو الخيار الأمثل. الزيوت العطرية تهدئ العقل والجسد. <a href="https://wa.me/966545049837" style="color:var(--gold);text-decoration:none">احجز جلستك</a>';
+            if(t.includes('رقبة'))return'🦒 <strong>ألم الرقبة:</strong> المساج السويدي مع تمددات لطيفة يخفف التوتر في منطقة الرقبة والكتفين. <a href="https://wa.me/966545049837" style="color:var(--gold);text-decoration:none">احجز الآن</a>';
+            if(t.includes('قدم'))return'🦶 <strong>ألم القدمين:</strong> الباديكير الفاخر مع تدليك منعش يعيد الحيوية لقدميك. <a href="https://wa.me/966545049837" style="color:var(--gold);text-decoration:none">احجز الآن</a>';
+            if(t.includes('سعر')||t.includes('سعر'))return'💰 <strong>الأسعار:</strong> تبدأ جلساتنا من 350 ريال. نقدم خصومات على الباقات المتعددة! <a href="#offers" style="color:var(--gold);text-decoration:none">شاهد العروض</a>';
+            return'🤖 لم أفهم تماماً. جرب وصف شعورك بكلمات بسيطة، أو <a href="https://wa.me/966545049837" style="color:var(--gold);text-decoration:none">تحدث مع خبير بشري</a> مباشرة.';
+        }
+
+        // ✨ تشغيل الموسيقى
+        function enableMusic(){
+            const audio=document.getElementById('bgMusic');
+            audio.volume=0.4;
+            audio.play().catch(()=>{});
+            musicPlaying=true;
+            document.getElementById('musicOverlay').classList.remove('show');
+            document.getElementById('musicFloatBtn').classList.add('playing');
+            document.querySelector('.music-float i').className='fas fa-pause';
+        }
+        
+        // ✨ تخطي الموسيقى
+        function skipMusic(){
+            document.getElementById('musicOverlay').classList.remove('show');
+        }
+        
+        // ✨ تبديل تشغيل الموسيقى
+        function toggleMusic(){
+            const audio=document.getElementById('bgMusic');
+            const btn=document.getElementById('musicFloatBtn');
+            const icon=btn.querySelector('i');
+            
+            if(musicPlaying){
+                audio.pause();
+                musicPlaying=false;
+                btn.classList.remove('playing');
+                icon.className='fas fa-music';
+            }else{
+                audio.volume=0.4;
+                audio.play().catch(()=>{});
+                musicPlaying=true;
+                btn.classList.add('playing');
+                icon.className='fas fa-pause';
+            }
+        }
+        
+        // ✨ الاشتراك في واتساب
+        function subscribeWhatsApp(){
+            const phone=document.getElementById('subscribePhone').value.trim();
+            if(phone&&phone.startsWith('05')&&phone.length===10){
+                window.open(`https://wa.me/966545049837?text=${encodeURIComponent('أرغب في الاشتراك بقائمة التخفيضات الحصرية. رقمي: '+phone)}`,'_blank');
+                showThanks();
+                document.getElementById('subscribePhone').value='';
+            }else{
+                alert('⚠️ يرجى إدخال رقم جوال صحيح يبدأ بـ 05 ويتكون من 10 أرقام');
+            }
+        }
+        
+        // ✨ إرسال تعليق
+        function submitComment(){
+            const text=document.getElementById('commentText').value.trim();
+            if(text.length<10){
+                alert('✍️ يرجى كتابة تعليق ذي معنى (10 أحرف على الأقل)');
+                return;
+            }
+            window.open(`https://wa.me/966545049837?text=${encodeURIComponent('💬 تعليق جديد من عميل:\n'+text)}`,'_blank');
+            document.getElementById('commentText').value='';
+            showThanks();
+        }
+        
+        // ✨ عداد العملاء المتحرك
+        function animateCounter(){
+            const el=document.getElementById('clientsCount');
+            if(!el)return;
+            const target=12458;
+            const duration=2500;
+            const start=performance.now();
+            
+            function update(now){
+                const progress=Math.min((now-start)/duration,1);
+                const eased=progress<0.5?2*progress*progress:(-1+(4-2*progress)*progress)*-1+1;
+                el.textContent=Math.floor(eased*target).toLocaleString('ar-EG');
+                if(progress<1)requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+        
+        // ✨ تبديل الوضع الليلي/النهاري
+        function toggleTheme(){
+            document.body.classList.toggle('light-theme');
+            const icon=document.querySelector('.theme-toggle i');
+            if(document.body.classList.contains('light-theme')){
+                icon.className='fas fa-sun';
+                localStorage.setItem('sensora-theme','light');
+            }else{
+                icon.className='fas fa-moon';
+                localStorage.setItem('sensora-theme','dark');
+            }
+        }
+        
+        // ✨ فتح مودال الجني
+        function openGenieModal(){
+            document.getElementById('genieModal').classList.add('show');
+        }
+        
+        // ✨ إغلاق مودال الجني
+        function closeGenieModal(){
+            document.getElementById('genieModal').classList.remove('show');
+        }
+        
+        // ✨ شريط تقدم التمرير
+        function initScrollProgress(){
+            const bar=document.getElementById('scrollProgress');
+            window.addEventListener('scroll',()=>{
+                const scrollTop=document.documentElement.scrollTop;
+                const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+                const scrolled=(scrollTop/scrollHeight)*100;
+                bar.style.width=scrolled+'%';
+            });
+        }
+        
+        // ✨ تأثيرات التمرير للعناصر
+        function initScrollAnimations(){
+            const observer=new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        entry.target.style.opacity='1';
+                        entry.target.style.transform='translateY(0)';
+                    }
+                });
+            },{threshold:0.1});
+            
+            document.querySelectorAll('.service-card, .offer-card, .review-card').forEach(el=>{
+                el.style.opacity='0';
+                el.style.transform='translateY(20px)';
+                el.style.transition='opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // ✨ التهيئة عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded',()=>{
+            // إخفاء شاشة التحميل
+            setTimeout(()=>{
+                document.getElementById('preloader').classList.add('hidden');
+                setTimeout(()=>{
+                    document.getElementById('musicOverlay').classList.add('show');
+                },600);
+            },2800);
+            
+            // تهيئة الميزات
+            initNature();
+            renderServices();
+            renderOffers();
+            renderFlags();
+            initChat();
+            animateCounter();
+            initScrollProgress();
+            initScrollAnimations();
+            
+            // تأثير شريط التنقل عند التمرير
+            let lastScroll=0;
+            window.addEventListener('scroll',()=>{
+                const navbar=document.getElementById('navbar');
+                const currentScroll=window.scrollY;
+                
+                if(currentScroll>50){
+                    navbar.classList.add('scrolled');
+                }else{
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // تحديث الروابط النشطة
+                document.querySelectorAll('.nav-link').forEach(link=>{
+                    const target=document.querySelector(link.getAttribute('href'));
+                    if(target){
+                        const rect=target.getBoundingClientRect();
+                        if(rect.top<=100&&rect.bottom>=100){
+                            document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    }
+                });
+                
+                lastScroll=currentScroll;
+            }, {passive:true});
+            
+            // استعادة الوضع المفضل
+            if(localStorage.getItem('sensora-theme')==='light'){
+                document.body.classList.add('light-theme');
+                document.querySelector('.theme-toggle i').className='fas fa-sun';
+            }
+            
+            // إغلاق المودال بالنقر خارج المحتوى
+            document.querySelectorAll('.modal').forEach(modal=>{
+                modal.addEventListener('click',(e)=>{
+                    if(e.target===modal){
+                        modal.classList.remove('open');
+                    }
+                });
+            });
+            
+            // دعم لوحة المفاتيح
+            document.addEventListener('keydown',(e)=>{
+                if(e.key==='Escape'){
+                    document.querySelectorAll('.modal.open, .thanks-overlay.show, .genie-modal.show').forEach(el=>{
+                        el.classList.remove('open','show');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
