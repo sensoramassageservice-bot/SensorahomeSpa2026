@@ -921,7 +921,7 @@
                     <h3>${s.title}</h3>
                     <p class="service-price">${s.price} ريال</p>
                     <p>${s.desc}</p>
-                    <button class="btn btn-gold btn-sm" onclick="openTherapistModal('all')" style="width:100%">احجز الآن</button>
+                    <button class="btn btn-gold" onclick="openTherapistModal('all')" style="width:100%">احجز الآن</button>
                 </div>
             `).join('');
         }
@@ -1000,44 +1000,29 @@
         }
 
         function submitComment() {
-            const text = document.getElementById('commentText').value;
-            if (text.trim()) {
-                window.open(`https://wa.me/966571900322?text=${encodeURIComponent(`تعليق: ${text}`)}`);
-                document.getElementById('commentText').value = '';
-                alert('شكراً لتعليقك! سيتم إرساله عبر واتساب');
+            const comment = document.getElementById('commentText').value;
+            if (!comment) {
+                alert('الرجاء كتابة تعليق');
+                return;
             }
+            window.open(`https://wa.me/966571900322?text=${encodeURIComponent(`تعليق: ${comment}`)}`);
+            document.getElementById('commentText').value = '';
         }
 
         function subscribeWhatsApp() {
             const phone = document.getElementById('subscribePhone').value;
-            if (phone.trim()) {
-                window.open(`https://wa.me/966571900322?text=${encodeURIComponent(`أريد الاشتراك في العروض الحصرية\nرقم جوالي: ${phone}`)}`);
-                document.getElementById('subscribePhone').value = '';
+            if (!phone) {
+                alert('الرجاء إدخال رقم الجوال');
+                return;
             }
+            window.open(`https://wa.me/966571900322?text=${encodeURIComponent(`أريد الاشتراك في العروض الحصرية\nرقم جوالي: ${phone}`)}`);
+            document.getElementById('subscribePhone').value = '';
         }
 
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             renderServices();
             renderOffers();
             renderFlags();
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                });
-            });
-
-            document.getElementById('therapistModal').addEventListener('click', (e) => {
-                if (e.target.id === 'therapistModal') {
-                    document.getElementById('therapistModal').classList.remove('open');
-                }
-            });
         });
     </script>
 </body>
